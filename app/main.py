@@ -15,15 +15,14 @@ class Ship:
                  end: tuple,
                  is_drowned: bool = False) -> None:
 
-        self.decks = []
         if start == end:
-            self.decks.append(Deck(*start))
+            self.decks = [Deck(*start)]
         if start[1] < end[1]:
-            for end_ in range(start[1], end[1] + 1):
-                self.decks.append(Deck(start[0], end_))
+            self.decks = [Deck(start[0], end_)
+                          for end_ in range(start[1], end[1] + 1)]
         if start[0] < end[0]:
-            for start_ in range(start[0], end[0] + 1):
-                self.decks.append(Deck(start_, start[1]))
+            self.decks = [Deck(start_, start[1])
+                          for start_ in range(start[0], end[0] + 1)]
         self.is_drowned = is_drowned
 
     def get_deck(self,
